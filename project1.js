@@ -1,12 +1,15 @@
+var list = ["ali","baba","da","marat","write code","marat"];
+var content="";
 
-while (true) {
-  document.getElementById('forText').innerHTML += " "+x;
-}
-var list = [1,2,3,4,5];
-for(i = 0;i<10;i++){
-  list[i] = 0;
-}
-
-forEach((item, list) => {
-  intem = 0;
+list.forEach((item, i) => {
+  content+="<li>"+item+"</li>";
 });
+
+
+var olList = document.getElementById('listName');
+olList.innerHTML += content;
+
+function createTable() {
+  var  x = document.getElementById('columns').value;
+    alert(x);
+}
