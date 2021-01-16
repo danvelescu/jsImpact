@@ -276,15 +276,20 @@ const server_data = {
     ]
 }
 
+
+
 function getAllBooks() {
     $.ajax({
-        url: "https://book-sharing-internship.herokuapp.com/all-books",
+      xhrFields: {
+       withCredentials: true
+   },
+   beforeSend: function (xhr) {
+       xhr.setRequestHeader('Authorization',"Basic dGVzdDEyMzp0ZXN0MTIzdGVzdDEyMw==");
+   },
+        url: "https://book-sharing-internship.herokuapp.com/books",
         method: "GET",
         username: "test123",
         password: "test123test123",
-        beforeSend: function (xhr) {
-         xhr.setRequestHeader('Authorization', 'Basic ' + btoa('test123:test123test123'));
-     },
         success: response => {
             alert("Succes");
         },
@@ -299,7 +304,12 @@ function display_all_books(){
   books = server_data.books;
   var html = '';
    $.each(books, (index, book) => {
-     html += '<li>'+book.title+'</li>';
+     html += '<li>'+book.title+'<br> Language:'+book.language+'<br><ul>';
+
+     $.each(book.tags,(index, tag) =>{
+       html += '<li>'+tag+'</li>';
+     });
+     html+='</ul>';
    });
    $("#book_items").html(html);
 }
